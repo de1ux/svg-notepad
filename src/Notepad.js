@@ -15,18 +15,19 @@ define(function(require) {
         this._el.setAttribute('id', 'Notepad');
         document.body.appendChild(this._el);
 
+        var self = this;
+        function onRegisterKey(e) {
+            return self.onRegisterKey(e);
+        }
         this._viewport = new NotepadViewport(this._el);
-        this._controller = new NotepadController(this.onRegisterKey);
+        this._controller = new NotepadController(onRegisterKey);
         this._grid = new Grid(this._viewport.size);
         //this.controller = new NotepadController();
     };
 
-    Notepad.prototype.insert = function(text) {
-        this._viewport.write(text, [100, 100]);
-    };
-
     Notepad.prototype.onRegisterKey = function(key) {
-        console.log('Notepad got key ' + key);
+        var layout = this._grid.setLayout(key);
+        this._viewport.write(key, layout.pointer);
     };
 
     return Notepad;

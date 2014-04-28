@@ -6,7 +6,6 @@
 
 define(function (require) {
     var SVG = require('../bower_components/svg.js/dist/svg.min');
-
     var FONT_WIDTH = 12;
     var FONT_STYLE = {
         family: 'Courier',
@@ -14,14 +13,9 @@ define(function (require) {
     };
 
     var NotepadViewport = function(el) {
-        // do we need this private var?
-        this._el = el;
-
-        // TODO - abstract the metrics to another class
-        this.size = [el.clientWidth, el.clientHeight];
-
         // instantiate the SVG canvas
         this._canvas = SVG(el).size('100%', '100%');
+        this.size = [el.clientWidth, el.clientHeight];
         this._canvas
             .text('Initialized SVG to ' + this.size[0] + 'x' + this.size[1])
             .font(FONT_STYLE);
