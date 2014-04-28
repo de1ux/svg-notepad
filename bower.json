@@ -6,6 +6,7 @@
     "**/*.txt"
   ],
   "dependencies": {
-    "svg.js": "1.0.0-rc.5"
+    "svg.js": "1.0.0-rc.5",
+    "requirejs": "2.1.11"
   }
 }
