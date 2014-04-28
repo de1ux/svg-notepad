@@ -1,4 +1,4 @@
 svg-notepad
 ===========
 
-Playing around with svg,js
+> Simple notepad that uses SVG
