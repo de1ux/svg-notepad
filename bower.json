@@ -1,0 +1,11 @@
+{
+  "name": "svg-notepad",
+  "version": "0.0.1",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "svg.js": "1.0.0-rc.5"
+  }
+}
