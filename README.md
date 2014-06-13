@@ -10,3 +10,9 @@ $ bower install
 $ open index.html
 # Type away!
 ```
+
+## Todo list
+* backspace button
+* add formatting
+* real-time editing via golang
+* support for multiple pages
