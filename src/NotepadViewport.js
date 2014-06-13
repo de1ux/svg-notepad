@@ -44,7 +44,7 @@ define(function (require) {
     NotepadViewport.prototype.highlight = function(indexes) {
         var children = this._canvas.children();
         for (var i = 0, len = indexes.length; i < len; i++) {
-            children[indexes[i]+1].attr('fill', 'yellow');
+            children[indexes[i]+1].attr('fill', 'red');
         }
     };
 

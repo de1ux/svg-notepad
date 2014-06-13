@@ -11,7 +11,6 @@ define(function(require) {
     var SearchManager     = require('src/SearchManager');
 
     var Notepad = function(document) {
-        window.notepad = this;
         // a div for the viewport to bind to
         this._el = document.createElement('div');
         this._el.setAttribute('id', 'Notepad');
@@ -25,17 +24,20 @@ define(function(require) {
         function onUpdateSearchMatches(matches) {
             return self.onUpdateSearchMatches(matches);
         }
-        self._searching = false;
+        this._searching = false;
 
         this._viewport = new NotepadViewport(this._el);
         this._grid = new Grid(this._viewport.size);
         this._controller = new NotepadController(onRegisterKey);
         this._searchManager = new SearchManager(this._grid, onUpdateSearchMatches);
 
-        // a div for the searchbox query and controls to appear in
         this._initSearchbox();
     };
 
+    /**
+     * Called when a valid character is pressed
+     * @param {string} key - A char to add to the searchbox or viewport
+     */
     Notepad.prototype.onRegisterKey = function(key) {
         if (this._searching) {
             this._searchManager.add(key);
@@ -46,6 +48,11 @@ define(function(require) {
         }
     };
 
+    /**
+     * Called when a key is added to the search manager
+     * @param {array} matches - A list of positions [12, 41, ...]
+     * that match the search
+     */
     Notepad.prototype.onUpdateSearchMatches = function(matches) {
         this._viewport.clearHighlighting();
         if (matches.length) {
@@ -53,6 +60,9 @@ define(function(require) {
         }
     };
 
+    /**
+     * DOM construction of the searchbox UI
+     */
     Notepad.prototype._initSearchbox = function() {
         var searchToggleButton = document.createElement('button');
         searchToggleButton.style.position = 'absolute';
@@ -71,6 +81,7 @@ define(function(require) {
         var reset = function() {
             self._searchManager.reset();
             self._searchport.innerHTML = 'Search for what?';
+            self._viewport.clearHighlighting();
         };
         searchToggleButton.onclick = function() {
             if (self._searching) {
