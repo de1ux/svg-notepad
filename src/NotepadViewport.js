@@ -14,8 +14,10 @@ define(function (require) {
 
     var NotepadViewport = function(el) {
         // instantiate the SVG canvas
-        this._canvas = SVG(el).size('100%', '100%');
-        this.size = [el.clientWidth, el.clientHeight];
+        this._canvas = SVG(el).size('90%', '100%');
+        // get the interpreted height
+        var svg = document.getElementsByTagName('svg')[0];
+        this.size = [svg.clientWidth, svg.clientHeight];
         this._canvas
             .text('Initialized SVG to ' + this.size[0] + 'x' + this.size[1])
             .font(FONT_STYLE);
@@ -30,6 +32,20 @@ define(function (require) {
         this._canvas.text(letter).x(xy[0])
                                  .y(xy[1])
                                  .font(FONT_STYLE);
+    };
+
+    NotepadViewport.prototype.clearHighlighting = function() {
+        var children = this._canvas.children();
+        for (var i = 1, len = children.length; i < len; i++) {
+            children[i].attr('fill', 'black');
+        }
+    };
+
+    NotepadViewport.prototype.highlight = function(indexes) {
+        var children = this._canvas.children();
+        for (var i = 0, len = indexes.length; i < len; i++) {
+            children[indexes[i]+1].attr('fill', 'red');
+        }
     };
 
     return NotepadViewport;
