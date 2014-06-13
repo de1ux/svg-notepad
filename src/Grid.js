@@ -1,10 +1,13 @@
 define(function(require) {
 
+    var GridStructure = require('src/GridStructure');
+
     var Grid = function(maxXY) {
         this.layout = {
-            pointer: [0,0], // pointer for the current text position
+            pointer: [0,12], // pointer for the current text position
             size:   [maxXY[0],maxXY[1]] // reference for the max XY
         };
+        this._structure = new GridStructure();
     };
 
     /**
@@ -18,7 +21,12 @@ define(function(require) {
             addLine(this.layout);
         }
         this.layout.pointer[0] += 12;
+        this._structure.add(character, this.layout.pointer);
         return this.layout;
+    };
+
+    Grid.prototype.getStructure = function() {
+        return this._structure;
     };
 
     function canFitOnLine(layout, character) {
