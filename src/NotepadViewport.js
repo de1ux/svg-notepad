@@ -13,6 +13,11 @@ define(function (require) {
     };
 
     var NotepadViewport = function(el) {
+        // a div for the SVG to attach to
+        var el = document.createElement('div');
+        el.setAttribute('id', 'Notepad');
+        el.style.margin = '40px';
+        document.body.appendChild(el);
         // instantiate the SVG canvas
         this._canvas = SVG(el).size('90%', '100%');
         // get the interpreted height
